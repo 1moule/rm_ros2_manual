@@ -1,0 +1,3 @@
+rm_ros2_manual:
+  ros__parameters:
+    robot_type: "standard"

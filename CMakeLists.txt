@@ -43,7 +43,7 @@ install(TARGETS ${PROJECT_NAME}
         DESTINATION lib/${PROJECT_NAME}
 )
 install(
-        DIRECTORY launch
+        DIRECTORY launch cfg
         DESTINATION share/${PROJECT_NAME}/
 )
 
