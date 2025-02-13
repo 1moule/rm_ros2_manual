@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <rclcpp/rclcpp.hpp>
+#include "rm_ros2_manual/manual_base.hpp"
 #include <rclcpp_lifecycle/lifecycle_node.hpp>
-#include <rm_ros2_common/tools/ros_tools.hpp>
 
 #include <thread>
 
@@ -14,24 +13,19 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 
 namespace rm_ros2_manual
 {
-class LifecycleNode : public rclcpp_lifecycle::LifecycleNode
+class ManualNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  explicit LifecycleNode(const std::string& node_name);
+  explicit ManualNode(const std::string& node_name);
   CallbackReturn on_configure(const rclcpp_lifecycle::State& /*state*/) override;
   CallbackReturn on_activate(const rclcpp_lifecycle::State& /*state*/) override;
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State& /*state*/) override;
   CallbackReturn on_cleanup(const rclcpp_lifecycle::State& /*state*/) override;
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State& /*state*/) override;
 
-protected:
-  virtual void run()
-  {
-    RCLCPP_INFO(this->get_logger(), "Running main loop");
-  }
-
 private:
   std::thread loop_thread_;
+  // std::shared_ptr<ManualBase> manual_control_;
   bool loop_running_ = false;
 };
 }  // namespace rm_ros2_manual

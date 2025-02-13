@@ -29,7 +29,9 @@ endforeach ()
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/manual_base.cpp)
+        src/manual_node.cpp
+        src/manual_base.cpp
+)
 target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
