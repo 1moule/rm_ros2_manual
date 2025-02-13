@@ -3,11 +3,23 @@
 //
 
 #include "rm_ros2_manual/manual_base.hpp"
+#include <rm_ros2_common/tools/ros_tools.hpp>
 
 namespace rm_ros2_manual
 {
-ManualBase::ManualBase(rclcpp_lifecycle::LifecycleNode::SharedPtr node) : node_(node)
+ManualBase::ManualBase(const rclcpp_lifecycle::LifecycleNode::SharedPtr& node) : node_(node)
 {
+  ManualBase::registerPubAndSub();
+}
+
+void ManualBase::registerPubAndSub()
+{
+  const std::string dbus_topic_ = getParam(node_, "dbus_topic", std::string("/rm_ecat_hw/dbus"));
+  auto dbusCallback = [this](const std::shared_ptr<rm_ros2_msgs::msg::DbusData> /*msg*/) -> void {
+    RCLCPP_INFO(node_->get_logger(), "Received dbus message");
+  };
+  dbus_sub_ =
+      node_->create_subscription<rm_ros2_msgs::msg::DbusData>(dbus_topic_, rclcpp::SystemDefaultsQoS(), dbusCallback);
 }
 
 void ManualBase::run()
