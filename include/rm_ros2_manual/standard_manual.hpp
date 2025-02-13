@@ -5,7 +5,6 @@
 #pragma once
 
 #include <rm_ros2_manual/manual_base.hpp>
-#include <rm_ros2_manual/module/chassis.hpp>
 
 namespace rm_ros2_manual
 {
