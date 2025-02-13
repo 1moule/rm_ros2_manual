@@ -2,7 +2,5 @@
 // Created by guanlin on 25-2-13.
 //
 
-#ifndef CHASSIS_HPP
-#define CHASSIS_HPP
+#pragma once
 
-#endif //CHASSIS_HPP

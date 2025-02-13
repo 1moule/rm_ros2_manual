@@ -3,6 +3,7 @@
 //
 
 #include <rm_ros2_manual/manual_node.hpp>
+#include <rm_ros2_manual/standard_manual.hpp>
 
 namespace rm_ros2_manual
 {
@@ -16,7 +17,7 @@ CallbackReturn ManualNode::on_configure(const rclcpp_lifecycle::State& /*state*/
   RCLCPP_INFO(get_logger(), "LifecycleNodeBase on_configure() is called.");
   std::string robot;
   this->get_parameter_or("robot_type", robot, static_cast<std::string>("error"));
-  manual_control_ = std::make_shared<ManualBase>(shared_from_this());
+  manual_control_ = std::make_shared<StandardManual>(shared_from_this());
   return CallbackReturn::SUCCESS;
 }
 
