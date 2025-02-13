@@ -5,7 +5,6 @@
 #pragma once
 
 #include "rm_ros2_manual/manual_base.hpp"
-#include <rclcpp_lifecycle/lifecycle_node.hpp>
 
 #include <thread>
 
@@ -13,7 +12,7 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 
 namespace rm_ros2_manual
 {
-class ManualNode : public rclcpp_lifecycle::LifecycleNode
+class ManualNode final : public rclcpp_lifecycle::LifecycleNode
 {
 public:
   explicit ManualNode(const std::string& node_name);
@@ -25,7 +24,7 @@ public:
 
 private:
   std::thread loop_thread_;
-  // std::shared_ptr<ManualBase> manual_control_;
+  std::shared_ptr<ManualBase> manual_control_;
   bool loop_running_ = false;
 };
 }  // namespace rm_ros2_manual
