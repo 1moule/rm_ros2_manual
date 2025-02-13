@@ -6,7 +6,7 @@
 
 namespace rm_ros2_manual
 {
-StandardManual::StandardManual(const rclcpp_lifecycle::LifecycleNode::SharedPtr& node) : ManualBase(node)
+StandardManual::StandardManual(const rclcpp::Node::SharedPtr& node) : ManualBase(node)
 {
 }
 

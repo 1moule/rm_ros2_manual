@@ -12,6 +12,6 @@ namespace rm_ros2_manual
 class StandardManual final : public ManualBase
 {
 public:
-  explicit StandardManual(const rclcpp_lifecycle::LifecycleNode::SharedPtr& node);
+  explicit StandardManual(const rclcpp::Node::SharedPtr& node);
 };
 }  // namespace rm_ros2_manual

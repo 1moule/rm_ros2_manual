@@ -7,14 +7,14 @@
 
 namespace rm_ros2_manual
 {
-ManualBase::ManualBase(const rclcpp_lifecycle::LifecycleNode::SharedPtr& node) : node_(node)
+ManualBase::ManualBase(const rclcpp::Node::SharedPtr& node) : node_(node)
 {
   ManualBase::registerPubAndSub();
 }
 
 void ManualBase::registerPubAndSub()
 {
-  const std::string dbus_topic_ = getParam(node_, "dbus_topic", std::string("/rm_ecat_hw/dbus"));
+  const std::string dbus_topic_ = getParam(std::move(node_), "dbus_topic", std::string("/rm_ecat_hw/dbus"));
   auto dbusCallback = [this](const std::shared_ptr<rm_ros2_msgs::msg::DbusData> /*msg*/) -> void {
     RCLCPP_INFO(node_->get_logger(), "Received dbus message");
   };
