@@ -17,6 +17,8 @@ endif ()
 
 set(CONTROLLER_INCLUDE_DEPENDS
         rclcpp
+        rclcpp_lifecycle
+        rm_ros2_common
 )
 
 # Find dependencies
@@ -26,7 +28,8 @@ foreach (Dependency IN ITEMS ${CONTROLLER_INCLUDE_DEPENDS})
 endforeach ()
 
 add_executable(${PROJECT_NAME}
-        src/main.cpp)
+        src/main.cpp
+        src/manual_base.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
