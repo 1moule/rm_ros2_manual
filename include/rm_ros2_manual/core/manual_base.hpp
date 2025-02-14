@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <rclcpp/rclcpp.hpp>
+#include "rm_ros2_manual/core/input_event.hpp"
 #include <rm_ros2_msgs/msg/dbus_data.hpp>
 
 namespace rm_ros2_manual

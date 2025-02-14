@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <rm_ros2_manual/manual_base.hpp>
+#include <rm_ros2_manual/core/manual_base.hpp>
 
 namespace rm_ros2_manual
 {

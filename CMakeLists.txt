@@ -28,7 +28,7 @@ endforeach ()
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/manual_base.cpp
+        src/core/manual_base.cpp
         src/standard_manual.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC

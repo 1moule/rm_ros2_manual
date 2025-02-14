@@ -2,7 +2,7 @@
 // Created by guanlin on 25-2-13.
 //
 
-#include "rm_ros2_manual/manual_base.hpp"
+#include "rm_ros2_manual/core/manual_base.hpp"
 #include <rm_ros2_common/tools/ros_tools.hpp>
 
 namespace rm_ros2_manual
