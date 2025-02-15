@@ -32,12 +32,12 @@ public:
     falling_handler_ = std::move(handler);
   }
 
-  void setActiveHigh(std::function<void(rclcpp::Duration)> handler)
+  void setActiveHigh(std::function<void()> handler)
   {
     active_high_handler_ = std::move(handler);
   }
 
-  void setActiveLow(std::function<void(rclcpp::Duration)> handler)
+  void setActiveLow(std::function<void()> handler)
   {
     active_low_handler_ = std::move(handler);
   }
@@ -48,7 +48,7 @@ public:
     falling_handler_ = std::move(falling_handler);
   }
 
-  void setActive(std::function<void(rclcpp::Duration)> high_handler, std::function<void(rclcpp::Duration)> low_handler)
+  void setActive(std::function<void()> high_handler, std::function<void()> low_handler)
   {
     active_high_handler_ = std::move(high_handler);
     active_low_handler_ = std::move(low_handler);
@@ -81,12 +81,11 @@ public:
       else if (!state && trigger_falling_handler_)
         trigger_falling_handler_();
       last_state_ = state;
-      last_change_ = now;
     }
     if (state && active_high_handler_)
-      active_high_handler_(now - last_change_);
+      active_high_handler_();
     if (!state && active_low_handler_)
-      active_low_handler_(now - last_change_);
+      active_low_handler_();
   }
 
 private:
@@ -97,9 +96,8 @@ private:
 
   bool last_state_;
   double delay_time_{};
-  rclcpp::Time last_change_;
   rclcpp::TimerBase::SharedPtr triggered_timer_;
-  std::function<void(rclcpp::Duration)> active_high_handler_, active_low_handler_;
+  std::function<void()> active_high_handler_, active_low_handler_;
   std::function<void()> rising_handler_, falling_handler_, trigger_rising_handler_, trigger_falling_handler_;
 };
 
