@@ -8,14 +8,15 @@ namespace rm_ros2_manual
 {
 ChassisGimbalManual::ChassisGimbalManual(const rclcpp::Node::SharedPtr& node) : ManualBase(node)
 {
-  chassis_cmd_sender_ = std::make_shared<rm_ros2_common::ChassisCommandSender>(node, "chassis");
+  chassis_cmd_sender_ = std::make_shared<rm_ros2_common::ChassisCommandSender>(node_, "chassis");
 
-  vel_cmd_sender_ = std::make_shared<rm_ros2_common::Vel2DCommandSender>(node, "vel");
-  getParam(node_, "vel.gyro_move_reduction", gyro_move_reduction_, 0.5);
-  getParam(node_, "vel.gyro_rotate_reduction", gyro_rotate_reduction_, 0.5);
+  vel_cmd_sender_ = std::make_shared<rm_ros2_common::Vel2DCommandSender>(node_, "vel");
+  gyro_move_reduction_ = getParam(node_, "vel.gyro_move_reduction", 1.0);
+  gyro_rotate_reduction_ = getParam(node_, "vel.gyro_rotate_reduction", 1.0);
+  std::cout << gyro_move_reduction_ << std::endl;
 
   gimbal_cmd_sender_ = std::make_shared<rm_ros2_common::GimbalCommandSender>(node, "gimbal");
-  getParam(node_, "gimbal.gimbal_scale", gimbal_scale_, 1.0);
+  gimbal_scale_ = getParam(node_, "gimbal.gimbal_scale", 1.0);
 
   // chassis_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::chassisOutputOn, this));
   // gimbal_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::gimbalOutputOn, this));

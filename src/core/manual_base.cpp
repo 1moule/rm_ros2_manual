@@ -8,7 +8,7 @@
 
 namespace rm_ros2_manual
 {
-ManualBase::ManualBase(rclcpp::Node::SharedPtr node) : node_(std::move(node))
+ManualBase::ManualBase(const rclcpp::Node::SharedPtr& node) : node_(node)
 {
   ManualBase::registerPubAndSub();
   right_switch_down_event_.setRising([this] { rightSwitchDownRise(); });
@@ -24,8 +24,7 @@ ManualBase::ManualBase(rclcpp::Node::SharedPtr node) : node_(std::move(node))
 
 void ManualBase::registerPubAndSub()
 {
-  std::string dbus_topic_;
-  getParam(node_, "dbus_topic", dbus_topic_, std::string("/rm_ecat_hw/dbus"));
+  const std::string dbus_topic_ = getParam(node_, "dbus_topic", std::string("/rm_ecat_hw/dbus"));
   dbus_sub_ = node_->create_subscription<rm_ros2_msgs::msg::DbusData>(
       dbus_topic_, rclcpp::SystemDefaultsQoS(), std::bind(&ManualBase::dbusDataCallback, this, std::placeholders::_1));
 }
