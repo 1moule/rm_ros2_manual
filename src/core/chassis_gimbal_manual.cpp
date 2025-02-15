@@ -13,7 +13,6 @@ ChassisGimbalManual::ChassisGimbalManual(const rclcpp::Node::SharedPtr& node) : 
   vel_cmd_sender_ = std::make_shared<rm_ros2_common::Vel2DCommandSender>(node_, "vel");
   gyro_move_reduction_ = getParam(node_, "vel.gyro_move_reduction", 1.0);
   gyro_rotate_reduction_ = getParam(node_, "vel.gyro_rotate_reduction", 1.0);
-  std::cout << gyro_move_reduction_ << std::endl;
 
   gimbal_cmd_sender_ = std::make_shared<rm_ros2_common::GimbalCommandSender>(node, "gimbal");
   gimbal_scale_ = getParam(node_, "gimbal.gimbal_scale", 1.0);
