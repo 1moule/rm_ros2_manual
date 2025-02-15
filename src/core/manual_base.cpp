@@ -24,7 +24,8 @@ ManualBase::ManualBase(const rclcpp::Node::SharedPtr& node) : node_(node)
 
 void ManualBase::registerPubAndSub()
 {
-  const std::string dbus_topic_ = getParam(node_, "dbus_topic", std::string("/rm_ecat_hw/dbus"));
+  std::string dbus_topic_;
+  getParam(node_, "dbus_topic", dbus_topic_, std::string("/rm_ecat_hw/dbus"));
   dbus_sub_ = node_->create_subscription<rm_ros2_msgs::msg::DbusData>(
       dbus_topic_, rclcpp::SystemDefaultsQoS(), std::bind(&ManualBase::dbusDataCallback, this, std::placeholders::_1));
 }

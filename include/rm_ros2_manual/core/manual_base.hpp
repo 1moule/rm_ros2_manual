@@ -112,7 +112,7 @@ protected:
     state_ = PC;
   }
 
-private:
+protected:
   rclcpp::Node::SharedPtr node_;
 
   // Publishers
