@@ -2,7 +2,7 @@
 // Created by guanlin on 25-2-12.
 //
 
-#include "rm_ros2_manual/standard_manual.hpp"
+#include "rm_ros2_manual/core/chassis_gimbal_manual.hpp"
 
 int main(int argc, char** argv)
 {
@@ -17,7 +17,7 @@ int main(int argc, char** argv)
   std::shared_ptr<rm_ros2_manual::ManualBase> manual_control;
 
   if (robot == "standard")
-    manual_control = std::make_shared<rm_ros2_manual::StandardManual>(node);
+    manual_control = std::make_shared<rm_ros2_manual::ChassisGimbalManual>(node);
   else
   {
     RCLCPP_ERROR(node->get_logger(), "No robot type specified");
