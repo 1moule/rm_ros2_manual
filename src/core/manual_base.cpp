@@ -4,22 +4,22 @@
 
 #include "rm_ros2_manual/core/manual_base.hpp"
 #include <rm_ros2_common/tools/ros_tools.hpp>
+#include <utility>
 
 namespace rm_ros2_manual
 {
-ManualBase::ManualBase(const rclcpp::Node::SharedPtr& node) : node_(node)
+ManualBase::ManualBase(rclcpp::Node::SharedPtr node) : node_(std::move(node))
 {
   ManualBase::registerPubAndSub();
-  right_switch_down_event_.setRising(std::bind(&ManualBase::rightSwitchDownRise, this));
-  right_switch_mid_event_.setRising(std::bind(&ManualBase::rightSwitchMidRise, this));
-  right_switch_up_event_.setRising(std::bind(&ManualBase::rightSwitchUpRise, this));
-  right_switch_down_event_.setActiveHigh(std::bind(&ManualBase::rightSwitchDownOn, this));
-  right_switch_mid_event_.setActiveHigh(std::bind(&ManualBase::rightSwitchMidOn, this));
-  right_switch_up_event_.setActiveHigh(std::bind(&ManualBase::rightSwitchUpOn, this));
-  left_switch_down_event_.setRising(std::bind(&ManualBase::leftSwitchDownRise, this));
-  left_switch_up_event_.setRising(std::bind(&ManualBase::leftSwitchUpRise, this));
-  left_switch_mid_event_.setEdge(std::bind(&ManualBase::leftSwitchMidRise, this),
-                                 std::bind(&ManualBase::leftSwitchMidFall, this));
+  right_switch_down_event_.setRising([this] { rightSwitchDownRise(); });
+  right_switch_mid_event_.setRising([this] { rightSwitchMidRise(); });
+  right_switch_up_event_.setRising([this] { rightSwitchUpRise(); });
+  right_switch_down_event_.setActiveHigh([this] { rightSwitchDownOn(); });
+  right_switch_mid_event_.setActiveHigh([this] { rightSwitchMidOn(); });
+  right_switch_up_event_.setActiveHigh([this] { rightSwitchUpOn(); });
+  left_switch_down_event_.setRising([this] { leftSwitchDownRise(); });
+  left_switch_up_event_.setRising([this] { leftSwitchUpRise(); });
+  left_switch_mid_event_.setEdge([this] { leftSwitchMidRise(); }, [this] { leftSwitchMidFall(); });
 }
 
 void ManualBase::registerPubAndSub()
