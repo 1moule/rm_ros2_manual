@@ -188,8 +188,9 @@ protected:
   // Timestamps and flags
   rclcpp::Time referee_last_get_stamp_;
   bool remote_is_open_{ false }, referee_is_online_ = false;
+  double chassis_power_{};
   int state_ = PASSIVE;
-  int robot_id_ = 0, chassis_power_ = 0;
+  int robot_id_ = 0;
   int chassis_output_on_ = 0, gimbal_output_on_ = 0, shooter_output_on_ = 0;
 
   // Input Events
