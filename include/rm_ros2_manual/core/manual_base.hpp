@@ -161,16 +161,10 @@ protected:
   // CallBack
   virtual void dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data);
   virtual void gameRobotStatusCallback(const rm_ros2_msgs::msg::GameRobotStatus::SharedPtr data);
-  virtual void gameRobotHpCallback(const rm_ros2_msgs::msg::GameRobotHp::SharedPtr /*data*/)
-  {
-  }
-  virtual void gameStatusCallback(const rm_ros2_msgs::msg::GameStatus::SharedPtr /*data*/)
-  {
-  }
+  virtual void gameRobotHpCallback(const rm_ros2_msgs::msg::GameRobotHp::SharedPtr /*data*/) {};
+  virtual void gameStatusCallback(const rm_ros2_msgs::msg::GameStatus::SharedPtr /*data*/) {};
   virtual void powerHeatDataCallback(const rm_ros2_msgs::msg::PowerHeatData::SharedPtr data);
-  virtual void capacityDataCallback(const rm_ros2_msgs::msg::PowerManagementSampleAndStatusData::SharedPtr /*data*/)
-  {
-  }
+  virtual void capacityDataCallback(const rm_ros2_msgs::msg::PowerManagementSampleAndStatusData::SharedPtr /*data*/) {};
 
   rclcpp::Node::SharedPtr node_;
 

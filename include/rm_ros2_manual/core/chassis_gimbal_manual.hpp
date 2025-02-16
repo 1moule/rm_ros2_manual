@@ -20,18 +20,16 @@ protected:
   void updatePc(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data) override;
   // void checkReferee() override;
   void checkKeyboard(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data) override;
+  void setChassisMode(int mode);
+
+  // RC
   void remoteControlTurnOff() override;
   void rightSwitchDownRise() override;
   void rightSwitchMidRise() override;
   void rightSwitchUpRise() override;
   void leftSwitchDownRise() override;
-  void dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data) override;
-  // void gameStatusCallback(const rm_msgs::GameStatus::ConstPtr& data) override;
-  // void gameRobotStatusCallback(const rm_msgs::GameRobotStatus::ConstPtr& data) override;
-  // void powerHeatDataCallback(const rm_msgs::PowerHeatData::ConstPtr& data) override;
-  // void capacityDataCallback(const rm_msgs::PowerManagementSampleAndStatusData ::ConstPtr& data) override;
-  // void trackCallback(const rm_msgs::TrackData::ConstPtr& data) override;
-  void setChassisMode(int mode);
+
+  // PC
   void wPress() override
   {
     x_scale_ = x_scale_ >= 1.0 ? 1.0 : x_scale_ + 1.0;
@@ -58,6 +56,14 @@ protected:
   void dPressing() override;
   void mouseMidRise(double m_z) override;
 
+  // CallBack
+  void dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data) override;
+  // void gameStatusCallback(const rm_msgs::GameStatus::ConstPtr& data) override;
+  // void gameRobotStatusCallback(const rm_msgs::GameRobotStatus::ConstPtr& data) override;
+  // void powerHeatDataCallback(const rm_msgs::PowerHeatData::ConstPtr& data) override;
+  // void capacityDataCallback(const rm_msgs::PowerManagementSampleAndStatusData ::ConstPtr& data) override;
+  // void trackCallback(const rm_msgs::TrackData::ConstPtr& data) override;
+
   std::shared_ptr<rm_ros2_common::Vel2DCommandSender> vel_cmd_sender_;
   std::shared_ptr<rm_ros2_common::GimbalCommandSender> gimbal_cmd_sender_;
   std::shared_ptr<rm_ros2_common::ChassisCommandSender> chassis_cmd_sender_;
@@ -67,7 +73,5 @@ protected:
   double gimbal_scale_{ 1. };
   double gyro_move_reduction_{ 1. };
   double gyro_rotate_reduction_{ 1. };
-
-  // InputEvent w_event_, s_event_, a_event_, d_event_;
 };
 }  // namespace rm_ros2_manual
