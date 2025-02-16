@@ -35,7 +35,7 @@ public:
 protected:
   virtual void registerPubAndSub();
   virtual void checkReferee();
-  virtual void checkKeyboard(const rm_ros2_msgs::msg::DbusData::SharedPtr& /*data*/) {};
+  virtual void checkKeyboard(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data);
   virtual void updateRc(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data);
   virtual void updatePc(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data);
   virtual void sendCommand(const rclcpp::Time& /*time*/) {};
@@ -89,6 +89,74 @@ protected:
   {
     state_ = PC;
   }
+  // PC
+  virtual void ctrlAPress() {};
+  virtual void ctrlBPress() {};
+  virtual void ctrlCPress() {};
+  virtual void ctrlDPress() {};
+  virtual void ctrlEPress() {};
+  virtual void ctrlFPress() {};
+  virtual void ctrlGPress() {};
+  virtual void ctrlQPress() {};
+  virtual void ctrlRPress() {};
+  virtual void ctrlSPress() {};
+  virtual void ctrlVPress() {};
+  virtual void ctrlVRelease() {};
+  virtual void ctrlWPress() {};
+  virtual void ctrlXPress() {};
+  virtual void ctrlZPress() {};
+
+  virtual void aPress() {};
+  virtual void aPressing() {};
+  virtual void aRelease() {};
+  virtual void bPressing() {};
+  virtual void bRelease() {};
+  virtual void cPressing() {};
+  virtual void cRelease() {};
+  virtual void dPress() {};
+  virtual void dPressing() {};
+  virtual void dRelease() {};
+  virtual void ePressing() {};
+  virtual void eRelease() {};
+  virtual void fPress() {};
+  virtual void fRelease() {};
+  virtual void gPress() {};
+  virtual void gRelease() {};
+  virtual void qPressing() {};
+  virtual void qRelease() {};
+  virtual void rPress() {};
+  virtual void sPress() {};
+  virtual void sPressing() {};
+  virtual void sRelease() {};
+  virtual void vPressing() {};
+  virtual void vRelease() {};
+  virtual void wPress() {};
+  virtual void wPressing() {};
+  virtual void wRelease() {};
+  virtual void xPress() {};
+  virtual void zPressing() {};
+  virtual void zRelease() {};
+
+  virtual void shiftPressing() {};
+  virtual void shiftRelease() {};
+  virtual void shiftBPress() {};
+  virtual void shiftBRelease() {};
+  virtual void shiftCPress() {};
+  virtual void shiftEPress() {};
+  virtual void shiftFPress() {};
+  virtual void shiftGPress() {};
+  virtual void shiftQPress() {};
+  virtual void shiftRPress() {};
+  virtual void shiftRRelease() {};
+  virtual void shiftVPress() {};
+  virtual void shiftVRelease() {};
+  virtual void shiftXPress() {};
+  virtual void shiftZPress() {};
+  virtual void shiftZRelease() {};
+
+  virtual void mouseLeftRelease() {};
+  virtual void mouseRightRelease() {};
+  virtual void mouseMidRise(double m_z) {};
 
   // CallBack
   virtual void dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data);
@@ -118,7 +186,6 @@ protected:
   rclcpp::Subscription<rm_ros2_msgs::msg::PowerManagementSampleAndStatusData>::SharedPtr capacity_sub_;
 
   // Data members
-  // sensor_msgs::msg::JointState joint_state_;
   // rm_msgs::msg::ManualToReferee manual_to_referee_pub_data_;
 
   // Controller Manager
@@ -128,13 +195,21 @@ protected:
   rclcpp::Time referee_last_get_stamp_;
   bool remote_is_open_{ false }, referee_is_online_ = false;
   int state_ = PASSIVE;
-  int robot_id_, chassis_power_;
+  int robot_id_ = 0, chassis_power_ = 0;
   int chassis_output_on_ = 0, gimbal_output_on_ = 0, shooter_output_on_ = 0;
 
   // Input Events
-  InputEvent robot_hp_event_, right_switch_down_event_, right_switch_mid_event_, right_switch_up_event_,
-      left_switch_down_event_, left_switch_mid_event_, left_switch_up_event_;
-  InputEvent chassis_power_on_event_, gimbal_power_on_event_, shooter_power_on_event_;
+  InputEvent right_switch_down_event_, right_switch_mid_event_, right_switch_up_event_, left_switch_down_event_,
+      left_switch_mid_event_, left_switch_up_event_;
+  InputEvent a_event_, b_event_, c_event_, d_event_, e_event_, f_event_, g_event_, q_event_, r_event_, s_event_,
+      v_event_, w_event_, x_event_, z_event_;
+  InputEvent ctrl_a_event_, ctrl_b_event_, ctrl_c_event_, ctrl_d_event_, ctrl_e_event_, ctrl_f_event_, ctrl_g_event_,
+      ctrl_q_event_, ctrl_r_event_, ctrl_s_event_, ctrl_v_event_, ctrl_w_event_, ctrl_x_event_, ctrl_z_event_;
+  InputEvent shift_event_, shift_a_event_, shift_b_event_, shift_c_event_, shift_d_event_, shift_e_event_,
+      shift_f_event_, shift_g_event_, shift_q_event_, shift_r_event_, shift_s_event_, shift_v_event_, shift_x_event_,
+      shift_z_event_;
+  InputEvent mouse_left_event_, mouse_right_event_;
+  InputEvent chassis_power_on_event_, gimbal_power_on_event_, shooter_power_on_event_, robot_hp_event_;
 
   // Actuator timestamps
   rclcpp::Time chassis_actuator_last_get_stamp_, gimbal_actuator_last_get_stamp_, shooter_actuator_last_get_stamp_;

@@ -19,14 +19,6 @@ ChassisGimbalManual::ChassisGimbalManual(const rclcpp::Node::SharedPtr& node) : 
 
   // chassis_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::chassisOutputOn, this));
   // gimbal_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::gimbalOutputOn, this));
-  w_event_.setEdge([this] { wPress(); }, [this] { wRelease(); });
-  w_event_.setActiveHigh([this] { wPressing(); });
-  s_event_.setEdge([this] { sPress(); }, [this] { sRelease(); });
-  s_event_.setActiveHigh([this] { sPressing(); });
-  a_event_.setEdge([this] { aPress(); }, [this] { aRelease(); });
-  a_event_.setActiveHigh([this] { aPressing(); });
-  d_event_.setEdge([this] { dPress(); }, [this] { dRelease(); });
-  d_event_.setActiveHigh([this] { dPressing(); });
 }
 
 void ChassisGimbalManual::sendCommand(const rclcpp::Time& time)

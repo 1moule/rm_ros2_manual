@@ -32,31 +32,31 @@ protected:
   // void capacityDataCallback(const rm_msgs::PowerManagementSampleAndStatusData ::ConstPtr& data) override;
   // void trackCallback(const rm_msgs::TrackData::ConstPtr& data) override;
   void setChassisMode(int mode);
-  virtual void wPress()
+  void wPress() override
   {
     x_scale_ = x_scale_ >= 1.0 ? 1.0 : x_scale_ + 1.0;
   }
-  virtual void aPress()
+  void aPress() override
   {
     y_scale_ = y_scale_ >= 1.0 ? 1.0 : y_scale_ + 1.0;
   }
-  virtual void sPress()
+  void sPress() override
   {
     x_scale_ = x_scale_ <= -1.0 ? -1.0 : x_scale_ - 1.0;
   }
-  virtual void dPress()
+  void dPress() override
   {
     y_scale_ = y_scale_ <= -1.0 ? -1.0 : y_scale_ - 1.0;
   }
-  virtual void wRelease();
-  virtual void sRelease();
-  virtual void aRelease();
-  virtual void dRelease();
-  virtual void wPressing();
-  virtual void sPressing();
-  virtual void aPressing();
-  virtual void dPressing();
-  virtual void mouseMidRise(double m_z);
+  void wRelease() override;
+  void sRelease() override;
+  void aRelease() override;
+  void dRelease() override;
+  void wPressing() override;
+  void sPressing() override;
+  void aPressing() override;
+  void dPressing() override;
+  void mouseMidRise(double m_z) override;
 
   std::shared_ptr<rm_ros2_common::Vel2DCommandSender> vel_cmd_sender_;
   std::shared_ptr<rm_ros2_common::GimbalCommandSender> gimbal_cmd_sender_;
@@ -68,6 +68,6 @@ protected:
   double gyro_move_reduction_{ 1. };
   double gyro_rotate_reduction_{ 1. };
 
-  InputEvent w_event_, s_event_, a_event_, d_event_;
+  // InputEvent w_event_, s_event_, a_event_, d_event_;
 };
 }  // namespace rm_ros2_manual
