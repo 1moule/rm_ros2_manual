@@ -156,7 +156,7 @@ protected:
 
   virtual void mouseLeftRelease() {};
   virtual void mouseRightRelease() {};
-  virtual void mouseMidRise(double m_z) {};
+  virtual void mouseMidRise(double /*m_z*/) {};
 
   // CallBack
   virtual void dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data);
