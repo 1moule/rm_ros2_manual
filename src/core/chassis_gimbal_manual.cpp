@@ -17,8 +17,8 @@ ChassisGimbalManual::ChassisGimbalManual(const rclcpp::Node::SharedPtr& node) : 
   gimbal_cmd_sender_ = std::make_shared<rm_ros2_common::GimbalCommandSender>(node_, "gimbal");
   gimbal_scale_ = getParam(node_, "gimbal.gimbal_scale", 1.0);
 
-  // chassis_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::chassisOutputOn, this));
-  // gimbal_power_on_event_.setRising(boost::bind(&ChassisGimbalManual::gimbalOutputOn, this));
+  chassis_power_on_event_.setRising(std::bind(&ChassisGimbalManual::chassisOutputOn, this));
+  gimbal_power_on_event_.setRising(std::bind(&ChassisGimbalManual::gimbalOutputOn, this));
 }
 
 void ChassisGimbalManual::sendCommand(const rclcpp::Time& time)
@@ -64,10 +64,7 @@ void ChassisGimbalManual::updatePc(const rm_ros2_msgs::msg::DbusData::SharedPtr&
 
 void ChassisGimbalManual::checkKeyboard(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data)
 {
-  w_event_.update((!dbus_data->key_ctrl) && dbus_data->key_w);
-  s_event_.update((!dbus_data->key_ctrl) && dbus_data->key_s);
-  a_event_.update((!dbus_data->key_ctrl) && dbus_data->key_a);
-  d_event_.update((!dbus_data->key_ctrl) && dbus_data->key_d);
+  ManualBase::checkKeyboard(dbus_data);
   if (dbus_data->m_z != 0)
     mouseMidRise(dbus_data->m_z);
 }

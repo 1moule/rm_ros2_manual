@@ -136,14 +136,18 @@ void ManualBase::checkKeyboard(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbu
   ctrl_x_event_.update(dbus_data->key_ctrl & dbus_data->key_x);
   ctrl_z_event_.update(dbus_data->key_ctrl & dbus_data->key_z);
 
+  a_event_.update(dbus_data->key_a & !dbus_data->key_ctrl & !dbus_data->key_shift);
   b_event_.update(dbus_data->key_b & !dbus_data->key_ctrl & !dbus_data->key_shift);
   c_event_.update(dbus_data->key_c & !dbus_data->key_ctrl & !dbus_data->key_shift);
+  d_event_.update(dbus_data->key_d & !dbus_data->key_ctrl & !dbus_data->key_shift);
   e_event_.update(dbus_data->key_e & !dbus_data->key_ctrl & !dbus_data->key_shift);
   f_event_.update(dbus_data->key_f & !dbus_data->key_ctrl & !dbus_data->key_shift);
   g_event_.update(dbus_data->key_g & !dbus_data->key_ctrl & !dbus_data->key_shift);
   q_event_.update(dbus_data->key_q & !dbus_data->key_ctrl & !dbus_data->key_shift);
   r_event_.update(dbus_data->key_r & !dbus_data->key_ctrl & !dbus_data->key_shift);
+  s_event_.update(dbus_data->key_s & !dbus_data->key_ctrl & !dbus_data->key_shift);
   v_event_.update(dbus_data->key_v & !dbus_data->key_ctrl & !dbus_data->key_shift);
+  w_event_.update(dbus_data->key_w & !dbus_data->key_ctrl & !dbus_data->key_shift);
   x_event_.update(dbus_data->key_x & !dbus_data->key_ctrl & !dbus_data->key_shift);
   z_event_.update(dbus_data->key_z & !dbus_data->key_ctrl & !dbus_data->key_shift);
 
