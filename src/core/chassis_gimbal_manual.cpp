@@ -36,7 +36,17 @@ void ChassisGimbalManual::updateRc(const rm_ros2_msgs::msg::DbusData::SharedPtr&
     chassis_cmd_sender_->setFollowVelDes(gimbal_cmd_sender_->getMsg()->rate_yaw);
   else
     chassis_cmd_sender_->setFollowVelDes(0.);
+  if (std::abs(dbus_data->wheel) > 0.01)
+    setChassisMode(rm_ros2_msgs::msg::ChassisCmd::RAW);
+  else
+    setChassisMode(rm_ros2_msgs::msg::ChassisCmd::FOLLOW);
+  vel_cmd_sender_->setAngularZVel((std::abs(dbus_data->ch_r_y) > 0.01 || std::abs(dbus_data->ch_r_x) > 0.01) ?
+                                      dbus_data->wheel * gyro_rotate_reduction_ :
+                                      dbus_data->wheel);
+  vel_cmd_sender_->setLinearXVel(is_gyro_ ? dbus_data->ch_r_y * gyro_move_reduction_ : dbus_data->ch_r_y);
+  vel_cmd_sender_->setLinearYVel(is_gyro_ ? -dbus_data->ch_r_x * gyro_move_reduction_ : -dbus_data->ch_r_x);
 }
+
 void ChassisGimbalManual::updatePc(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_data)
 {
   ManualBase::updatePc(dbus_data);
