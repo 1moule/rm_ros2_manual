@@ -30,6 +30,7 @@ add_executable(${PROJECT_NAME}
         src/main.cpp
         src/core/manual_base.cpp
         src/standard_manual.cpp
+        src/core/chassis_gimbal_manual.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
