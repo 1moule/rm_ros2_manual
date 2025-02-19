@@ -8,11 +8,11 @@
 
 namespace rm_ros2_manual
 {
-ManualBase::ManualBase(const rclcpp::Node::SharedPtr& node) : node_(node)
+ManualBase::ManualBase(rclcpp::Node::SharedPtr node) : node_(std::move(node))
 {
   ManualBase::registerPubAndSub();
   referee_last_get_stamp_ = node_->get_clock()->now();
-  controller_manager_ = std::make_shared<rm_ros2_common::ControllerManager>();
+  controller_manager_ = std::make_shared<rm_ros2_common::ControllerManager>(node_);
   // RC
   right_switch_down_event_.setRising([this] { rightSwitchDownRise(); });
   right_switch_mid_event_.setRising([this] { rightSwitchMidRise(); });
