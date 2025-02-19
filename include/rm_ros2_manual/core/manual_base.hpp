@@ -187,7 +187,7 @@ protected:
 
   // Timestamps and flags
   rclcpp::Time referee_last_get_stamp_;
-  bool remote_is_open_{ false }, referee_is_online_ = false;
+  bool remote_is_open_{ false }, referee_is_online_ = false, activate_controllers = false;
   double chassis_power_{};
   int state_ = PASSIVE;
   int robot_id_ = 0;

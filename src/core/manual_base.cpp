@@ -181,31 +181,39 @@ void ManualBase::updatePc(const rm_ros2_msgs::msg::DbusData::SharedPtr& dbus_dat
 
 void ManualBase::robotDie()
 {
-  if (remote_is_open_)
-    controller_manager_->deactivateMainControllers();
+  // if (remote_is_open_)
+  // controller_manager_->deactivateMainControllers();
 }
 
 void ManualBase::robotRevive()
 {
-  if (remote_is_open_)
-    controller_manager_->activateMainControllers();
+  // if (remote_is_open_)
+  // controller_manager_->activateMainControllers();
 }
 
 void ManualBase::remoteControlTurnOff()
 {
-  controller_manager_->deactivateMainControllers();
   state_ = PASSIVE;
 }
 
 void ManualBase::remoteControlTurnOn()
 {
-  controller_manager_->activateMainControllers();
   state_ = IDLE;
 }
 
 void ManualBase::run()
 {
   checkReferee();
+  if (remote_is_open_ && !activate_controllers)
+  {
+    controller_manager_->activateMainControllers();
+    activate_controllers = true;
+  }
+  if (!remote_is_open_ && activate_controllers)
+  {
+    controller_manager_->deactivateMainControllers();
+    activate_controllers = false;
+  }
 }
 
 void ManualBase::dbusDataCallback(const rm_ros2_msgs::msg::DbusData::SharedPtr data)
