@@ -21,7 +21,7 @@ namespace rm_ros2_manual
 class ManualBase
 {
 public:
-  explicit ManualBase(const rclcpp::Node::SharedPtr& node);
+  explicit ManualBase(rclcpp::Node::SharedPtr node);
   virtual ~ManualBase() = default;
   enum
   {
